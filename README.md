@@ -9,5 +9,8 @@ Then source code organization is:
 
 Per my usual development flow, these algorithms are written in TDD fashion where I create the basic algorithm class with at least one method that implements the algorithm, then follow it with a test method.  I'm testing all along the way.  While it does create overhead in implementation, the results is highly testable code.  
 
+## Algorithms
+
+1. Fibonacci Sequence.
 
 Currently, performance is not measured, but hopefully will be added in the future.
