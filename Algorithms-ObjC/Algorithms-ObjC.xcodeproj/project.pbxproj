@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD61C7108CD004069FF /* AppDelegate.m */; };
+		B59F0FDA1C7108CD004069FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD91C7108CD004069FF /* main.m */; };
+		B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FDC1C7108CD004069FF /* ViewController.m */; };
+		B59F0FDF1C7108CD004069FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B59F0FDE1C7108CD004069FF /* Assets.xcassets */; };
+		B59F0FE21C7108CD004069FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B59F0FE01C7108CD004069FF /* Main.storyboard */; };
+		B59F0FED1C7108CD004069FF /* Algorithms_ObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FEC1C7108CD004069FF /* Algorithms_ObjCTests.m */; };
+		B59F0FF81C7108CD004069FF /* Algorithms_ObjCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FF71C7108CD004069FF /* Algorithms_ObjCUITests.m */; };
+		B59F10081C710FC5004069FF /* Fibonacci.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F10071C710FC5004069FF /* Fibonacci.m */; };
+		B59F10091C710FC5004069FF /* Fibonacci.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F10071C710FC5004069FF /* Fibonacci.m */; };
+		B59F100B1C71121C004069FF /* FibonacciTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F100A1C71121C004069FF /* FibonacciTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B59F0FE91C7108CD004069FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B59F0FCA1C7108CD004069FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59F0FD11C7108CD004069FF;
+			remoteInfo = "Algorithms-ObjC";
+		};
+		B59F0FF41C7108CD004069FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B59F0FCA1C7108CD004069FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59F0FD11C7108CD004069FF;
+			remoteInfo = "Algorithms-ObjC";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B59F0FD21C7108CD004069FF /* Algorithms-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Algorithms-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59F0FD51C7108CD004069FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B59F0FD61C7108CD004069FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B59F0FD91C7108CD004069FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B59F0FDB1C7108CD004069FF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B59F0FDC1C7108CD004069FF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B59F0FDE1C7108CD004069FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B59F0FE11C7108CD004069FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B59F0FE31C7108CD004069FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59F0FE81C7108CD004069FF /* Algorithms-ObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Algorithms-ObjCTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59F0FEC1C7108CD004069FF /* Algorithms_ObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Algorithms_ObjCTests.m; sourceTree = "<group>"; };
+		B59F0FEE1C7108CD004069FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59F0FF31C7108CD004069FF /* Algorithms-ObjCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Algorithms-ObjCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59F0FF71C7108CD004069FF /* Algorithms_ObjCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Algorithms_ObjCUITests.m; sourceTree = "<group>"; };
+		B59F0FF91C7108CD004069FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59F10051C7109F4004069FF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B59F10061C710FC5004069FF /* Fibonacci.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fibonacci.h; path = "Algorithms-ObjCTests/Fibonacci.h"; sourceTree = "<group>"; };
+		B59F10071C710FC5004069FF /* Fibonacci.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fibonacci.m; path = "Algorithms-ObjCTests/Fibonacci.m"; sourceTree = "<group>"; };
+		B59F100A1C71121C004069FF /* FibonacciTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FibonacciTests.m; path = "Algorithms-ObjCTests/Fibonacci/FibonacciTests.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B59F0FCF1C7108CD004069FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FE51C7108CD004069FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FF01C7108CD004069FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B59F0FC91C7108CD004069FF = {
+			isa = PBXGroup;
+			children = (
+				B59F10051C7109F4004069FF /* README.md */,
+				B59F100C1C71122A004069FF /* Fibonacci */,
+				B59F0FD41C7108CD004069FF /* Algorithms-ObjC */,
+				B59F0FEB1C7108CD004069FF /* Algorithm Tests */,
+				B59F0FF61C7108CD004069FF /* Algorithms-ObjCUITests */,
+				B59F0FD31C7108CD004069FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B59F0FD31C7108CD004069FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0FD21C7108CD004069FF /* Algorithms-ObjC.app */,
+				B59F0FE81C7108CD004069FF /* Algorithms-ObjCTests.xctest */,
+				B59F0FF31C7108CD004069FF /* Algorithms-ObjCUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B59F0FD41C7108CD004069FF /* Algorithms-ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0FD51C7108CD004069FF /* AppDelegate.h */,
+				B59F0FD61C7108CD004069FF /* AppDelegate.m */,
+				B59F0FDB1C7108CD004069FF /* ViewController.h */,
+				B59F0FDC1C7108CD004069FF /* ViewController.m */,
+				B59F0FDE1C7108CD004069FF /* Assets.xcassets */,
+				B59F0FE01C7108CD004069FF /* Main.storyboard */,
+				B59F0FE31C7108CD004069FF /* Info.plist */,
+				B59F0FD81C7108CD004069FF /* Supporting Files */,
+			);
+			path = "Algorithms-ObjC";
+			sourceTree = "<group>";
+		};
+		B59F0FD81C7108CD004069FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0FD91C7108CD004069FF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B59F0FEB1C7108CD004069FF /* Algorithm Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0FEC1C7108CD004069FF /* Algorithms_ObjCTests.m */,
+				B59F0FEE1C7108CD004069FF /* Info.plist */,
+			);
+			name = "Algorithm Tests";
+			path = "Algorithms-ObjCTests";
+			sourceTree = "<group>";
+		};
+		B59F0FF61C7108CD004069FF /* Algorithms-ObjCUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B59F0FF71C7108CD004069FF /* Algorithms_ObjCUITests.m */,
+				B59F0FF91C7108CD004069FF /* Info.plist */,
+			);
+			path = "Algorithms-ObjCUITests";
+			sourceTree = "<group>";
+		};
+		B59F100C1C71122A004069FF /* Fibonacci */ = {
+			isa = PBXGroup;
+			children = (
+				B59F100A1C71121C004069FF /* FibonacciTests.m */,
+				B59F10061C710FC5004069FF /* Fibonacci.h */,
+				B59F10071C710FC5004069FF /* Fibonacci.m */,
+			);
+			name = Fibonacci;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B59F0FD11C7108CD004069FF /* Algorithms-ObjC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59F0FFC1C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjC" */;
+			buildPhases = (
+				B59F0FCE1C7108CD004069FF /* Sources */,
+				B59F0FCF1C7108CD004069FF /* Frameworks */,
+				B59F0FD01C7108CD004069FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Algorithms-ObjC";
+			productName = "Algorithms-ObjC";
+			productReference = B59F0FD21C7108CD004069FF /* Algorithms-ObjC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B59F0FE71C7108CD004069FF /* Algorithms-ObjCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59F0FFF1C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjCTests" */;
+			buildPhases = (
+				B59F0FE41C7108CD004069FF /* Sources */,
+				B59F0FE51C7108CD004069FF /* Frameworks */,
+				B59F0FE61C7108CD004069FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B59F0FEA1C7108CD004069FF /* PBXTargetDependency */,
+			);
+			name = "Algorithms-ObjCTests";
+			productName = "Algorithms-ObjCTests";
+			productReference = B59F0FE81C7108CD004069FF /* Algorithms-ObjCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B59F0FF21C7108CD004069FF /* Algorithms-ObjCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B59F10021C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjCUITests" */;
+			buildPhases = (
+				B59F0FEF1C7108CD004069FF /* Sources */,
+				B59F0FF01C7108CD004069FF /* Frameworks */,
+				B59F0FF11C7108CD004069FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B59F0FF51C7108CD004069FF /* PBXTargetDependency */,
+			);
+			name = "Algorithms-ObjCUITests";
+			productName = "Algorithms-ObjCUITests";
+			productReference = B59F0FF31C7108CD004069FF /* Algorithms-ObjCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B59F0FCA1C7108CD004069FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Gene Dahilig";
+				TargetAttributes = {
+					B59F0FD11C7108CD004069FF = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					B59F0FE71C7108CD004069FF = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = B59F0FD11C7108CD004069FF;
+					};
+					B59F0FF21C7108CD004069FF = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = B59F0FD11C7108CD004069FF;
+					};
+				};
+			};
+			buildConfigurationList = B59F0FCD1C7108CD004069FF /* Build configuration list for PBXProject "Algorithms-ObjC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B59F0FC91C7108CD004069FF;
+			productRefGroup = B59F0FD31C7108CD004069FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B59F0FD11C7108CD004069FF /* Algorithms-ObjC */,
+				B59F0FE71C7108CD004069FF /* Algorithms-ObjCTests */,
+				B59F0FF21C7108CD004069FF /* Algorithms-ObjCUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B59F0FD01C7108CD004069FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59F0FDF1C7108CD004069FF /* Assets.xcassets in Resources */,
+				B59F0FE21C7108CD004069FF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FE61C7108CD004069FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FF11C7108CD004069FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B59F0FCE1C7108CD004069FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */,
+				B59F0FDA1C7108CD004069FF /* main.m in Sources */,
+				B59F10081C710FC5004069FF /* Fibonacci.m in Sources */,
+				B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FE41C7108CD004069FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59F10091C710FC5004069FF /* Fibonacci.m in Sources */,
+				B59F0FED1C7108CD004069FF /* Algorithms_ObjCTests.m in Sources */,
+				B59F100B1C71121C004069FF /* FibonacciTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B59F0FEF1C7108CD004069FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B59F0FF81C7108CD004069FF /* Algorithms_ObjCUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B59F0FEA1C7108CD004069FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B59F0FD11C7108CD004069FF /* Algorithms-ObjC */;
+			targetProxy = B59F0FE91C7108CD004069FF /* PBXContainerItemProxy */;
+		};
+		B59F0FF51C7108CD004069FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B59F0FD11C7108CD004069FF /* Algorithms-ObjC */;
+			targetProxy = B59F0FF41C7108CD004069FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B59F0FE01C7108CD004069FF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B59F0FE11C7108CD004069FF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B59F0FFA1C7108CD004069FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B59F0FFB1C7108CD004069FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B59F0FFD1C7108CD004069FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjC/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B59F0FFE1C7108CD004069FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjC/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B59F10001C7108CD004069FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjCTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Algorithms-ObjC.app/Contents/MacOS/Algorithms-ObjC";
+			};
+			name = Debug;
+		};
+		B59F10011C7108CD004069FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjCTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Algorithms-ObjC.app/Contents/MacOS/Algorithms-ObjC";
+			};
+			name = Release;
+		};
+		B59F10031C7108CD004069FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjCUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Algorithms-ObjC";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B59F10041C7108CD004069FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Algorithms-ObjCUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Algorithms-ObjC";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B59F0FCD1C7108CD004069FF /* Build configuration list for PBXProject "Algorithms-ObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59F0FFA1C7108CD004069FF /* Debug */,
+				B59F0FFB1C7108CD004069FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59F0FFC1C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59F0FFD1C7108CD004069FF /* Debug */,
+				B59F0FFE1C7108CD004069FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59F0FFF1C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59F10001C7108CD004069FF /* Debug */,
+				B59F10011C7108CD004069FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B59F10021C7108CD004069FF /* Build configuration list for PBXNativeTarget "Algorithms-ObjCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B59F10031C7108CD004069FF /* Debug */,
+				B59F10041C7108CD004069FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B59F0FCA1C7108CD004069FF /* Project object */;
+}
