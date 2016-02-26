@@ -118,21 +118,21 @@
     
     nodes = [root getNodesAtDepth:1];
     XCTAssert(nodes.count == 2);
-    XCTAssert(nodes[0].Value == 52);
-    XCTAssert(nodes[1].Value == 40);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 11);
     
 
     nodes = [root getNodesAtDepth:2];
     XCTAssert(nodes.count == 4);
-    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[0].Value == 18);
     XCTAssert(nodes[1].Value == 100);
-    XCTAssert(nodes[2].Value == 11);
+    XCTAssert(nodes[2].Value == 40);
     XCTAssert(nodes[3].Value == 30);
     
     nodes = [root getNodesAtDepth:3];
     XCTAssert(nodes.count == 2);
     XCTAssert(nodes[0].Value == 26);
-    XCTAssert(nodes[1].Value == 18);
+    XCTAssert(nodes[1].Value == 52);
 
     // edge case: desired depth greater than actual.
     nodes = [root getNodesAtDepth:99];
@@ -240,11 +240,12 @@
                /  \
               /    \
              /      \
-           52        40
+           16        11
           /  \      /  \
-        16  100   11   30
+        18  100   40   30
        /  \
-      26  18
+      26  52
+
  */
 
 -(HeapNode*)buildTree_3
@@ -259,14 +260,15 @@
     HeapNode* node26 = [[HeapNode alloc] initWithValue: 26];
     HeapNode* node18 = [[HeapNode alloc] initWithValue: 18];
     
-    root.left       = node52;
-    root.right      = node40;
-    node52.left     = node16;
-    node52.right    = node100;
-    node16.left     = node26;
-    node16.right    = node18;
-    node40.left     = node11;
-    node40.right    = node30;
+    
+    root.left       = node16;
+    root.right      = node11;
+    node16.left     = node18;
+    node16.right    = node100;
+    node18.left     = node26;
+    node18.right    = node52;
+    node11.left     = node40;
+    node11.right    = node30;
     return root;
 }
 
