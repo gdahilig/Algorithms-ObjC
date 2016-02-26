@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B56F34EF1C7FBAEB00AB3ABB /* HeapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */; };
+		B56F34F01C7FBAEB00AB3ABB /* HeapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */; };
+		B56F34F21C7FBD5600AB3ABB /* HeapNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */; };
 		B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD61C7108CD004069FF /* AppDelegate.m */; };
 		B59F0FDA1C7108CD004069FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD91C7108CD004069FF /* main.m */; };
 		B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FDC1C7108CD004069FF /* ViewController.m */; };
@@ -17,6 +20,8 @@
 		B59F10081C710FC5004069FF /* Fibonacci.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F10071C710FC5004069FF /* Fibonacci.m */; };
 		B59F10091C710FC5004069FF /* Fibonacci.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F10071C710FC5004069FF /* Fibonacci.m */; };
 		B59F100B1C71121C004069FF /* FibonacciTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F100A1C71121C004069FF /* FibonacciTests.m */; };
+		B59F10121C73E584004069FF /* InsertionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F10111C73E584004069FF /* InsertionSort.swift */; };
+		B59F10131C73E584004069FF /* InsertionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F10111C73E584004069FF /* InsertionSort.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B56F34ED1C7FBAEB00AB3ABB /* HeapNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeapNode.h; sourceTree = "<group>"; };
+		B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeapNode.m; sourceTree = "<group>"; };
+		B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeapNodeTests.m; sourceTree = "<group>"; };
 		B59F0FD21C7108CD004069FF /* Algorithms-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Algorithms-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59F0FD51C7108CD004069FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B59F0FD61C7108CD004069FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +64,9 @@
 		B59F10061C710FC5004069FF /* Fibonacci.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fibonacci.h; path = "Algorithms-ObjCTests/Fibonacci.h"; sourceTree = "<group>"; };
 		B59F10071C710FC5004069FF /* Fibonacci.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fibonacci.m; path = "Algorithms-ObjCTests/Fibonacci.m"; sourceTree = "<group>"; };
 		B59F100A1C71121C004069FF /* FibonacciTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FibonacciTests.m; path = "Algorithms-ObjCTests/Fibonacci/FibonacciTests.m"; sourceTree = "<group>"; };
+		B59F100F1C73E583004069FF /* Algorithms-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Algorithms-ObjC-Bridging-Header.h"; sourceTree = "<group>"; };
+		B59F10101C73E583004069FF /* Algorithms-ObjCTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Algorithms-ObjCTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		B59F10111C73E584004069FF /* InsertionSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InsertionSort.swift; path = "Algorithms-ObjC/InsertionSort.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +94,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B56F34F31C7FBD7F00AB3ABB /* BinaryHeap */ = {
+			isa = PBXGroup;
+			children = (
+				B56F34ED1C7FBAEB00AB3ABB /* HeapNode.h */,
+				B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */,
+				B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */,
+			);
+			name = BinaryHeap;
+			sourceTree = "<group>";
+		};
 		B59F0FC91C7108CD004069FF = {
 			isa = PBXGroup;
 			children = (
 				B59F10051C7109F4004069FF /* README.md */,
+				B59F100F1C73E583004069FF /* Algorithms-ObjC-Bridging-Header.h */,
+				B59F10101C73E583004069FF /* Algorithms-ObjCTests-Bridging-Header.h */,
 				B59F100C1C71122A004069FF /* Fibonacci */,
+				B59F10141C73E5AA004069FF /* InsertionSort */,
+				B59F100E1C71712E004069FF /* Merge Sort */,
+				B59F100D1C7170C7004069FF /* Trees & Graphs */,
 				B59F0FD41C7108CD004069FF /* Algorithms-ObjC */,
 				B59F0FEB1C7108CD004069FF /* Algorithm Tests */,
 				B59F0FF61C7108CD004069FF /* Algorithms-ObjCUITests */,
@@ -155,6 +181,29 @@
 				B59F10071C710FC5004069FF /* Fibonacci.m */,
 			);
 			name = Fibonacci;
+			sourceTree = "<group>";
+		};
+		B59F100D1C7170C7004069FF /* Trees & Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				B56F34F31C7FBD7F00AB3ABB /* BinaryHeap */,
+			);
+			name = "Trees & Graphs";
+			sourceTree = "<group>";
+		};
+		B59F100E1C71712E004069FF /* Merge Sort */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Merge Sort";
+			sourceTree = "<group>";
+		};
+		B59F10141C73E5AA004069FF /* InsertionSort */ = {
+			isa = PBXGroup;
+			children = (
+				B59F10111C73E584004069FF /* InsertionSort.swift */,
+			);
+			name = InsertionSort;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,9 +336,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */,
+				B59F10121C73E584004069FF /* InsertionSort.swift in Sources */,
 				B59F0FDA1C7108CD004069FF /* main.m in Sources */,
 				B59F10081C710FC5004069FF /* Fibonacci.m in Sources */,
 				B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */,
+				B56F34EF1C7FBAEB00AB3ABB /* HeapNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +349,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B59F10091C710FC5004069FF /* Fibonacci.m in Sources */,
+				B56F34F01C7FBAEB00AB3ABB /* HeapNode.m in Sources */,
+				B59F10131C73E584004069FF /* InsertionSort.swift in Sources */,
+				B56F34F21C7FBD5600AB3ABB /* HeapNodeTests.m in Sources */,
 				B59F0FED1C7108CD004069FF /* Algorithms_ObjCTests.m in Sources */,
 				B59F100B1C71121C004069FF /* FibonacciTests.m in Sources */,
 			);
@@ -421,11 +475,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Algorithms-ObjC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Algorithms-ObjC-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -433,11 +490,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Algorithms-ObjC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Algorithms-ObjC-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -445,11 +504,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Algorithms-ObjCTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Algorithms-ObjCTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Algorithms-ObjC.app/Contents/MacOS/Algorithms-ObjC";
 			};
 			name = Debug;
@@ -458,11 +520,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Algorithms-ObjCTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mutensil.Algorithms-ObjCTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Algorithms-ObjCTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Algorithms-ObjC.app/Contents/MacOS/Algorithms-ObjC";
 			};
 			name = Release;
