@@ -16,4 +16,5 @@
 -(id) initWithValue:(int)val;
 -(int) getTreeDepth;
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
+-(HeapNode*)getNextParentHeapNode;
 @end

@@ -40,20 +40,24 @@
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     
-    HeapNode *root = [self buildTree_0];
-    int depth = [root getTreeDepth];
+    HeapNode *root;
+    int depth;
     
+    root = [self buildTree_0];
+    depth = [root getTreeDepth];
+    XCTAssert(depth == 0);
+    
+    root = [self buildTree_1];
+    depth = [root getTreeDepth];
     XCTAssert(depth == 1);
-}
 
-- (void)testGetTreeDepth_1 {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    
-    HeapNode *root = [self buildTree_1];
-    int depth = [root getTreeDepth];
-    
-    XCTAssert(depth == 2);
+    root = [self buildTree_2];
+    depth = [root getTreeDepth];
+    XCTAssert(depth == 1);
+
+    root = [self buildTree_3];
+    depth = [root getTreeDepth];
+    XCTAssert(depth == 3);
 }
 
 - (void)testGetNodesAtDepth_0
@@ -137,6 +141,47 @@
     // edge case: desired depth is negative.
     nodes = [root getNodesAtDepth:-1];
     XCTAssert(nodes.count == 0);
+}
+
+- (void)testGetNextParentHeapNode_0
+{
+    HeapNode *root = [self buildTree_0];
+
+    HeapNode *heapNodeParent = [root getNextParentHeapNode];
+    
+    XCTAssert(heapNodeParent !=nil);
+    XCTAssert(heapNodeParent.Value = 10);
+    
+}
+
+- (void)testGetNextParentHeapNode_1
+{
+    HeapNode *root = [self buildTree_1];
+    
+    HeapNode *heapNodeParent = [root getNextParentHeapNode];
+    
+    XCTAssert(heapNodeParent !=nil);
+    XCTAssert(heapNodeParent.Value = 10);
+}
+
+- (void)testGetNextParentHeapNode_2
+{
+    HeapNode *root = [self buildTree_2];
+    
+    HeapNode *heapNodeParent = [root getNextParentHeapNode];
+    
+    XCTAssert(heapNodeParent !=nil);
+    XCTAssert(heapNodeParent.Value = 52);
+}
+
+- (void)testGetNextParentHeapNode_3
+{
+    HeapNode *root = [self buildTree_3];
+    
+    HeapNode *heapNodeParent = [root getNextParentHeapNode];
+    
+    XCTAssert(heapNodeParent !=nil);
+    XCTAssert(heapNodeParent.Value = 100);
 }
 
 - (void)testPerformanceExample {

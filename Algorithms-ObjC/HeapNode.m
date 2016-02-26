@@ -7,6 +7,7 @@
 //
 
 #import "HeapNode.h"
+#include <math.h>
 
 @interface HeapNode ()
 
@@ -26,7 +27,7 @@
  */
 -(int) getTreeDepth
 {
-    int depth = 1;
+    int depth = 0;
     HeapNode* node = self;
     
     while (node.left != nil)
@@ -61,5 +62,52 @@
     [self getNodes:0 :depth :&nodes];
     
     return nodes;
+}
+
+/*
+ Computes next parent node from the self as root.
+ */
+-(HeapNode*)getNextParentHeapNode
+{
+    HeapNode* nextParent;
+    
+    int depth = [self getTreeDepth];
+    NSMutableArray<HeapNode*> *nodes;
+    
+    nodes = [self getNodesAtDepth:depth];
+    if (nodes.count < pow(2,depth))
+    {// last row is still filling up, go up one level and add node there.
+        nodes = [self getNodesAtDepth:depth-1];
+    }
+    
+    // from this row, get the first available spot.
+    
+    for (HeapNode* node in nodes)
+    {
+        if (node.left == nil)
+            return node;
+        if (node.right == nil)
+            return node;
+    }
+    
+    //error
+    NSAssert(FALSE, @"Whoa - shouldn't get here.");
+    return nextParent;
+}
+
+-(HeapNode*)insertNode:(HeapNode*)nodeNew
+{
+    HeapNode* parent = [self getNextParentHeapNode];
+    
+    if (parent != nil)
+    {
+        if (parent.left == nil)
+            parent.left = nodeNew;
+        else if (parent.right == nil)
+            parent.right = nodeNew;
+        else
+            NSAssert(FALSE, @"Error - invalid parent node.");
+    }
+    return nil;
 }
 @end
