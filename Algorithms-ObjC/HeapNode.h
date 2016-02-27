@@ -17,4 +17,5 @@
 -(int) getTreeDepth;
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
 -(HeapNode*)getNextParentHeapNode;
+-(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode;
 @end

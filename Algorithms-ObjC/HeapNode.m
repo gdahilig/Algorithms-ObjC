@@ -110,4 +110,62 @@
     }
     return nil;
 }
+
+/*
+ recursive function to find a node.
+ */
+-(BOOL)findPath:(NSMutableArray<HeapNode*>*)path forTarget: (HeapNode*)target
+{
+    BOOL found = NO;
+    if (target.Value == self.Value)
+    {
+        [path addObject:self];
+        return YES;
+    }
+    else
+    {
+        if (self.left != nil)
+        {
+            found = [self.left findPath:path forTarget:target];
+            if (found)
+            {
+                [path addObject:self];
+                return YES;
+            }
+        }
+        if (self.right != nil)
+        {
+            found = [self.right findPath:path forTarget:target];
+            if (found)
+            {
+                [path addObject:self];
+            }
+        }
+    }
+    
+    return found;
+}
+
+/*
+ createPathToNode
+ returns a the nodes that lead from the given node (i.e. root) to the desired node.
+ returns nil if no path is found. 
+ Although it is intended to be used with the root node, it will work for any node in a tree.
+ 
+ Caller is responsible for array returned.
+ */
+
+-(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode
+{
+    HeapNode * node = self;
+    NSMutableArray* path = [[NSMutableArray alloc] initWithCapacity:100];
+    bool found = [self findPath:path forTarget:targetNode];
+    
+    if (!found)
+    { // release the array.
+        path = nil;
+    }
+    
+    return path;
+}
 @end

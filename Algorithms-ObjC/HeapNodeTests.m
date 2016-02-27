@@ -77,7 +77,7 @@
     nodes = [root getNodesAtDepth:1];
     
     XCTAssert(nodes.count == 1);
-    XCTAssert(nodes[0].Value == 52);
+    XCTAssert(nodes[0].Value == 16);
 }
 
 - (void)testGetNodesAtDepth_2
@@ -91,8 +91,8 @@
     
     nodes = [root getNodesAtDepth:1];
     XCTAssert(nodes.count == 2);
-    XCTAssert(nodes[0].Value == 52);
-    XCTAssert(nodes[1].Value == 40);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 11);
     
     // edge case: desired depth greater than actual.
     nodes = [root getNodesAtDepth:2];
@@ -150,7 +150,7 @@
     HeapNode *heapNodeParent = [root getNextParentHeapNode];
     
     XCTAssert(heapNodeParent !=nil);
-    XCTAssert(heapNodeParent.Value = 10);
+    XCTAssert(heapNodeParent.Value == 10);
     
 }
 
@@ -161,7 +161,7 @@
     HeapNode *heapNodeParent = [root getNextParentHeapNode];
     
     XCTAssert(heapNodeParent !=nil);
-    XCTAssert(heapNodeParent.Value = 10);
+    XCTAssert(heapNodeParent.Value == 10);
 }
 
 - (void)testGetNextParentHeapNode_2
@@ -171,7 +171,7 @@
     HeapNode *heapNodeParent = [root getNextParentHeapNode];
     
     XCTAssert(heapNodeParent !=nil);
-    XCTAssert(heapNodeParent.Value = 52);
+    XCTAssert(heapNodeParent.Value == 16);
 }
 
 - (void)testGetNextParentHeapNode_3
@@ -181,7 +181,55 @@
     HeapNode *heapNodeParent = [root getNextParentHeapNode];
     
     XCTAssert(heapNodeParent !=nil);
-    XCTAssert(heapNodeParent.Value = 100);
+    XCTAssert(heapNodeParent.Value == 100);
+}
+
+-(void) testGetPathToNode
+{
+    HeapNode *root = [self buildTree_0];
+    NSMutableArray<HeapNode*>*path;
+    
+    // tree includes only the root node with value 10.
+    path = [root createPathToNode:root];
+    XCTAssert(path.count == 1);
+    XCTAssert(path[0].Value == 10);
+    path = nil;
+    
+    // test with a value not in the tree.
+    HeapNode *node = [[HeapNode alloc] initWithValue:-1];
+    path = [root createPathToNode:node];
+    XCTAssert(path == nil);
+    path=nil;
+    
+    // test with two nodes.
+    root = [self buildTree_1];
+    node = [[HeapNode alloc] initWithValue:16];
+    path = [root createPathToNode:node];
+    XCTAssert(path != nil);
+    XCTAssert(path.count == 2);
+    XCTAssert(path[0].Value == 16);
+    XCTAssert(path[1].Value == 10);
+    
+    //
+    root = [self buildTree_3];
+    node = [[HeapNode alloc] initWithValue:52];
+    path = [root createPathToNode:node];
+    XCTAssert(path != nil);
+    XCTAssert(path.count == 4);
+    XCTAssert(path[0].Value == 52);
+    XCTAssert(path[1].Value == 18);
+    XCTAssert(path[2].Value == 16);
+    XCTAssert(path[3].Value == 10);
+    
+    node = [[HeapNode alloc] initWithValue:40];
+    path = [root createPathToNode:node];
+    XCTAssert(path != nil);
+    XCTAssert(path.count == 3);
+    XCTAssert(path[0].Value == 40);
+    XCTAssert(path[1].Value == 11);
+    XCTAssert(path[2].Value == 10);
+
+    
 }
 
 - (void)testPerformanceExample {
@@ -191,6 +239,7 @@
     }];
 }
 
+#pragma mark- Build Tree Methods
 /* build a tree:
         10
        /  \
@@ -205,12 +254,12 @@
 /* build a tree:
         10
        /  \
-     52    nil
+     16    nil
  */
 -(HeapNode*)buildTree_1
 {
     HeapNode* root = [[HeapNode alloc] initWithValue: 10];
-    HeapNode* node = [[HeapNode alloc] initWithValue: 52];
+    HeapNode* node = [[HeapNode alloc] initWithValue: 16];
     
     root.left = node;
     
@@ -221,13 +270,13 @@
 /* build a tree:
           10
          /  \
-       52    40
+       16    11
  */
 -(HeapNode*)buildTree_2
 {
     HeapNode* root = [[HeapNode alloc] initWithValue: 10];
-    HeapNode* node = [[HeapNode alloc] initWithValue: 52];
-    HeapNode* node2 = [[HeapNode alloc] initWithValue: 40];
+    HeapNode* node = [[HeapNode alloc] initWithValue: 16];
+    HeapNode* node2 = [[HeapNode alloc] initWithValue: 11];
     
     root.left = node;
     root.right = node2;
