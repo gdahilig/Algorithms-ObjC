@@ -18,4 +18,5 @@
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
 -(HeapNode*)getNextParentHeapNode;
 -(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode;
+-(HeapNode*)insertNode:(HeapNode*)nodeNew;
 @end

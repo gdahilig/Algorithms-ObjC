@@ -24,7 +24,7 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
-
+#pragma mark- HeapNode Init Unit Tests
 - (void)testNodeInit
 {
     HeapNode* root = [[HeapNode alloc] initWithValue: 10];
@@ -36,6 +36,7 @@
     
 }
 
+#pragma mark- GetTreeDepth Unit Tests
 - (void)testGetTreeDepth_0 {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -143,6 +144,7 @@
     XCTAssert(nodes.count == 0);
 }
 
+#pragma mark- GetNextParentHeapNode Unit Tests
 - (void)testGetNextParentHeapNode_0
 {
     HeapNode *root = [self buildTree_0];
@@ -231,7 +233,98 @@
 
     
 }
+#pragma mark- Insert Node Unit Tests
+/*
+    starting with a tree that has only a single node with the value of 10.
+    progressively insert values to the tree.  The tree should maintain its "completeness" throughout.
+ */
+-(void) testInsertNode_0
+{
+    HeapNode *root;
+    HeapNode* node;
+    HeapNode* parent;
+    
+    root = [self buildTree_0];
+    node = [[HeapNode alloc]initWithValue:12];
 
+    parent = [root insertNode:node];
+    XCTAssert(root.Value == 10);
+    XCTAssert(parent.Value == 10);
+    XCTAssert(root.left.Value == 12);
+    XCTAssert(root.right == nil);
+    
+    node = [[HeapNode alloc]initWithValue:199];
+    parent = [root insertNode:node];
+    XCTAssert(root.Value == 10);
+    XCTAssert(parent.Value == 10);
+    XCTAssert(root.left != nil);
+    XCTAssert(root.left.Value == 12);
+    XCTAssert(root.right != nil);
+    XCTAssert(root.right.Value == 199);
+    
+    node = [[HeapNode alloc]initWithValue:32];
+    parent = [root insertNode:node];
+    XCTAssert(parent != nil);
+    XCTAssert(parent.Value == 12);
+    XCTAssert(parent.left != nil);
+    XCTAssert(parent.left.Value == 32);
+    XCTAssert(parent.right == nil);
+
+    node = [[HeapNode alloc]initWithValue:1];
+    parent = [root insertNode:node];
+    XCTAssert(parent != nil);
+    XCTAssert(parent.Value == 12);
+    XCTAssert(parent.left != nil);
+    XCTAssert(parent.left.Value == 32);
+    XCTAssert(parent.right != nil);
+    XCTAssert(parent.right.Value == 1);
+    
+    node = [[HeapNode alloc]initWithValue:4];
+    parent = [root insertNode:node];
+    XCTAssert(parent != nil);
+    XCTAssert(parent.Value == 199);
+    XCTAssert(parent.left != nil);
+    XCTAssert(parent.left.Value == 4);
+    XCTAssert(parent.right == nil);
+    
+    node = [[HeapNode alloc]initWithValue:42];
+    parent = [root insertNode:node];
+    XCTAssert(parent != nil);
+    XCTAssert(parent.Value == 199);
+    XCTAssert(parent.left != nil);
+    XCTAssert(parent.left.Value == 4);
+    XCTAssert(parent.right != nil);
+    XCTAssert(parent.right.Value == 42);
+
+    node = [[HeapNode alloc]initWithValue:0];
+    parent = [root insertNode:node];
+    XCTAssert(parent != nil);
+    XCTAssert(parent.Value == 32);
+    XCTAssert(parent.left != nil);
+    XCTAssert(parent.left.Value == 0);
+    XCTAssert(parent.right == nil);
+    
+}
+
+-(void) testInsertNode_1
+{
+    HeapNode *root;
+    HeapNode* node;
+    HeapNode* parent;
+    
+    root = [self buildTree_1];
+    node = [[HeapNode alloc]initWithValue:12];
+    
+    parent = [root insertNode:node];
+    XCTAssert(root.Value == 10);
+    XCTAssert(parent.Value == 10);
+    XCTAssert(root.left.Value == 16);
+    XCTAssert(root.right == nil);
+    
+}
+
+
+#pragma mark- Performance Unit Tests
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
@@ -265,7 +358,6 @@
     
     return root;
 }
-
 
 /* build a tree:
           10

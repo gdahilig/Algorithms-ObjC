@@ -95,6 +95,11 @@
     return nextParent;
 }
 
+/*
+ Inserts the node into the tree. maintains tree completeness.
+ In other words, allways adds the node to the last level of the tree 
+ from left to right.
+ */
 -(HeapNode*)insertNode:(HeapNode*)nodeNew
 {
     HeapNode* parent = [self getNextParentHeapNode];
@@ -108,7 +113,8 @@
         else
             NSAssert(FALSE, @"Error - invalid parent node.");
     }
-    return nil;
+    
+    return parent;
 }
 
 /*
