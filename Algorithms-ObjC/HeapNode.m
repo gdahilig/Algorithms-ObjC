@@ -19,8 +19,16 @@
 -(id) initWithValue:(int)val
 {
     _Value = val;
+    _userData = nil;
     return self;
 }
+
+-(id) initWithValue:(int) val andData:(id)data
+  {
+      _Value = val;
+      _userData = data;
+      return self;
+  }
 
 /*
  Depth of a complete binary tree is always the left-most leaf node from the current node.
@@ -100,7 +108,7 @@
  In other words, allways adds the node to the last level of the tree 
  from left to right.
  */
--(HeapNode*)insertNode:(HeapNode*)nodeNew
+-(HeapNode*)insertNodeToCompleteTree:(HeapNode*)nodeNew
 {
     HeapNode* parent = [self getNextParentHeapNode];
     
@@ -116,6 +124,76 @@
     
     return parent;
 }
+
+/*
+ Bubble up the minimum value up the tree given the path.
+ Assumes path is valide path in the tree.
+ Assumes last item on the list is *always* root.
+ */
++(HeapNode*)bubbleUpWithPath:(NSMutableArray<HeapNode*>*)path
+{
+    if (path.count == 0)
+        return nil;
+    if (path.count ==1)
+        return path[0];
+    
+    HeapNode* root = path[path.count-1];
+    
+    int indx = 2; // marks the position of the grandparent.
+
+    HeapNode* target      = path.count >=1 ? path[indx-2] : nil;
+    HeapNode* parent      = path.count >=2 ? path[indx-1] : nil;
+    HeapNode* grandParent = path.count >=3 ? path[indx] : nil;
+        
+    while ((parent != nil) && (target.Value < parent.Value))
+    {
+        // try to swap node and parent.
+        HeapNode *tmpLeft, *tmpRight;
+        
+        tmpLeft = target.left;
+        tmpRight= target.right;
+        
+        // target assumes parents position
+        if (parent.left == target)
+        {
+            target.left  = parent;
+            target.right = parent.right;
+        }
+        else
+        {//parent.right == target
+            target.right = parent;
+            target.left  = parent.left;
+        }
+        
+        parent.left  = tmpLeft;
+        parent.right = tmpRight;
+        
+        if (grandParent != nil)
+        {
+            if (grandParent.left == parent)
+                grandParent.left = target;
+            else
+                grandParent.right = target;
+        }
+        else
+        {// No grandparent means the parent is the root.
+            root = target;
+        }
+    
+        // set up for the next iteration.
+        indx += 1;
+//        target      = parent;
+        parent      = grandParent;
+        grandParent = indx < path.count? path[indx] : nil;
+    }
+
+    return root;
+}
+
+/*
+ inserts a node into tree then bubbles the up the mininum value.
+*/
+
 
 /*
  recursive function to find a node.
@@ -154,7 +232,7 @@
 
 /*
  createPathToNode
- returns a the nodes that lead from the given node (i.e. root) to the desired node.
+ returns a the nodes that lead from the current node (i.e. root) to the desired node.
  returns nil if no path is found. 
  Although it is intended to be used with the root node, it will work for any node in a tree.
  

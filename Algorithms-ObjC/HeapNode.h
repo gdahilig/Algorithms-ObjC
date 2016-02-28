@@ -9,14 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface HeapNode : NSObject
-@property (strong) HeapNode* left;
-@property (strong) HeapNode* right;
+@property HeapNode* left;
+@property HeapNode* right;
+@property id userData;
 @property int Value;
 
 -(id) initWithValue:(int)val;
+-(id) initWithValue:(int) val andData:(id)data;
 -(int) getTreeDepth;
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
 -(HeapNode*)getNextParentHeapNode;
 -(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode;
--(HeapNode*)insertNode:(HeapNode*)nodeNew;
+-(HeapNode*)insertNodeToCompleteTree:(HeapNode*)nodeNew;
+
++(HeapNode*)bubbleUpWithPath:(NSMutableArray<HeapNode*>*)path;
 @end

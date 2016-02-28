@@ -10,6 +10,11 @@
 		B56F34EF1C7FBAEB00AB3ABB /* HeapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */; };
 		B56F34F01C7FBAEB00AB3ABB /* HeapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */; };
 		B56F34F21C7FBD5600AB3ABB /* HeapNodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */; };
+		B56F34F61C82308200AB3ABB /* MinHeap.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34F51C82308200AB3ABB /* MinHeap.m */; };
+		B56F34F71C82308200AB3ABB /* MinHeap.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34F51C82308200AB3ABB /* MinHeap.m */; };
+		B56F34F91C82309D00AB3ABB /* MinHeapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F34F81C82309D00AB3ABB /* MinHeapTests.m */; };
+		B56F34FF1C828DF700AB3ABB /* TestsData_10000_random.txt in Resources */ = {isa = PBXBuildFile; fileRef = B56F34FD1C828DF700AB3ABB /* TestsData_10000_random.txt */; };
+		B56F35001C828DF700AB3ABB /* TestsData_10000_sorted.txt in Resources */ = {isa = PBXBuildFile; fileRef = B56F34FE1C828DF700AB3ABB /* TestsData_10000_sorted.txt */; };
 		B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD61C7108CD004069FF /* AppDelegate.m */; };
 		B59F0FDA1C7108CD004069FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FD91C7108CD004069FF /* main.m */; };
 		B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59F0FDC1C7108CD004069FF /* ViewController.m */; };
@@ -45,6 +50,11 @@
 		B56F34ED1C7FBAEB00AB3ABB /* HeapNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeapNode.h; sourceTree = "<group>"; };
 		B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeapNode.m; sourceTree = "<group>"; };
 		B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeapNodeTests.m; sourceTree = "<group>"; };
+		B56F34F41C82308200AB3ABB /* MinHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinHeap.h; sourceTree = "<group>"; };
+		B56F34F51C82308200AB3ABB /* MinHeap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinHeap.m; sourceTree = "<group>"; };
+		B56F34F81C82309D00AB3ABB /* MinHeapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinHeapTests.m; sourceTree = "<group>"; };
+		B56F34FD1C828DF700AB3ABB /* TestsData_10000_random.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestsData_10000_random.txt; sourceTree = "<group>"; };
+		B56F34FE1C828DF700AB3ABB /* TestsData_10000_sorted.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestsData_10000_sorted.txt; sourceTree = "<group>"; };
 		B59F0FD21C7108CD004069FF /* Algorithms-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Algorithms-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59F0FD51C7108CD004069FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B59F0FD61C7108CD004069FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,6 +110,11 @@
 				B56F34ED1C7FBAEB00AB3ABB /* HeapNode.h */,
 				B56F34EE1C7FBAEB00AB3ABB /* HeapNode.m */,
 				B56F34F11C7FBD5600AB3ABB /* HeapNodeTests.m */,
+				B56F34F41C82308200AB3ABB /* MinHeap.h */,
+				B56F34F51C82308200AB3ABB /* MinHeap.m */,
+				B56F34F81C82309D00AB3ABB /* MinHeapTests.m */,
+				B56F34FD1C828DF700AB3ABB /* TestsData_10000_random.txt */,
+				B56F34FE1C828DF700AB3ABB /* TestsData_10000_sorted.txt */,
 			);
 			name = BinaryHeap;
 			sourceTree = "<group>";
@@ -318,6 +333,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56F35001C828DF700AB3ABB /* TestsData_10000_sorted.txt in Resources */,
+				B56F34FF1C828DF700AB3ABB /* TestsData_10000_random.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +354,7 @@
 			files = (
 				B59F0FDD1C7108CD004069FF /* ViewController.m in Sources */,
 				B59F10121C73E584004069FF /* InsertionSort.swift in Sources */,
+				B56F34F61C82308200AB3ABB /* MinHeap.m in Sources */,
 				B59F0FDA1C7108CD004069FF /* main.m in Sources */,
 				B59F10081C710FC5004069FF /* Fibonacci.m in Sources */,
 				B59F0FD71C7108CD004069FF /* AppDelegate.m in Sources */,
@@ -350,9 +368,11 @@
 			files = (
 				B59F10091C710FC5004069FF /* Fibonacci.m in Sources */,
 				B56F34F01C7FBAEB00AB3ABB /* HeapNode.m in Sources */,
+				B56F34F71C82308200AB3ABB /* MinHeap.m in Sources */,
 				B59F10131C73E584004069FF /* InsertionSort.swift in Sources */,
 				B56F34F21C7FBD5600AB3ABB /* HeapNodeTests.m in Sources */,
 				B59F0FED1C7108CD004069FF /* Algorithms_ObjCTests.m in Sources */,
+				B56F34F91C82309D00AB3ABB /* MinHeapTests.m in Sources */,
 				B59F100B1C71121C004069FF /* FibonacciTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

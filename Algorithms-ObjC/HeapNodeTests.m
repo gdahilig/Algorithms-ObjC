@@ -36,6 +36,16 @@
     
 }
 
+-(void) testNodeInitWithData
+{
+    NSNumber *data = [[NSNumber alloc] initWithInt:999];
+    HeapNode* root = [[HeapNode alloc] initWithValue: 10 andData:data];
+    NSNumber *data2 = root.userData;
+    XCTAssert(data2 != nil);
+    XCTAssert(data2.intValue == 999);
+    
+}
+
 #pragma mark- GetTreeDepth Unit Tests
 - (void)testGetTreeDepth_0 {
     // This is an example of a functional test case.
@@ -186,6 +196,8 @@
     XCTAssert(heapNodeParent.Value == 100);
 }
 
+#pragma mark- getPathToNode Unit Tests
+
 -(void) testGetPathToNode
 {
     HeapNode *root = [self buildTree_0];
@@ -247,14 +259,14 @@
     root = [self buildTree_0];
     node = [[HeapNode alloc]initWithValue:12];
 
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(root.Value == 10);
     XCTAssert(parent.Value == 10);
     XCTAssert(root.left.Value == 12);
     XCTAssert(root.right == nil);
     
     node = [[HeapNode alloc]initWithValue:199];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(root.Value == 10);
     XCTAssert(parent.Value == 10);
     XCTAssert(root.left != nil);
@@ -263,7 +275,7 @@
     XCTAssert(root.right.Value == 199);
     
     node = [[HeapNode alloc]initWithValue:32];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(parent != nil);
     XCTAssert(parent.Value == 12);
     XCTAssert(parent.left != nil);
@@ -271,7 +283,7 @@
     XCTAssert(parent.right == nil);
 
     node = [[HeapNode alloc]initWithValue:1];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(parent != nil);
     XCTAssert(parent.Value == 12);
     XCTAssert(parent.left != nil);
@@ -280,7 +292,7 @@
     XCTAssert(parent.right.Value == 1);
     
     node = [[HeapNode alloc]initWithValue:4];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(parent != nil);
     XCTAssert(parent.Value == 199);
     XCTAssert(parent.left != nil);
@@ -288,7 +300,7 @@
     XCTAssert(parent.right == nil);
     
     node = [[HeapNode alloc]initWithValue:42];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(parent != nil);
     XCTAssert(parent.Value == 199);
     XCTAssert(parent.left != nil);
@@ -297,7 +309,7 @@
     XCTAssert(parent.right.Value == 42);
 
     node = [[HeapNode alloc]initWithValue:0];
-    parent = [root insertNode:node];
+    parent = [root insertNodeToCompleteTree:node];
     XCTAssert(parent != nil);
     XCTAssert(parent.Value == 32);
     XCTAssert(parent.left != nil);
@@ -306,21 +318,414 @@
     
 }
 
--(void) testInsertNode_1
+#pragma mark- bubbleUpWithPath
+- (void) testBubbleUpWithPath
 {
+    HeapNode* newRoot;
     HeapNode *root;
     HeapNode* node;
-    HeapNode* parent;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
     
-    root = [self buildTree_1];
-    node = [[HeapNode alloc]initWithValue:12];
+    root = [self buildTree_0];
+
     
-    parent = [root insertNode:node];
-    XCTAssert(root.Value == 10);
-    XCTAssert(parent.Value == 10);
-    XCTAssert(root.left.Value == 16);
-    XCTAssert(root.right == nil);
+    path = [[NSMutableArray alloc] init];  //empty list.
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    XCTAssert(newRoot == nil);
     
+    // test with 1 node.
+    path = [root createPathToNode:root];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    XCTAssert(newRoot.Value == root.Value);
+    
+    // test tree with 2 nodes: 4, 10 - nothing bubbled.
+    root = [[HeapNode alloc] initWithValue:4];
+    node = [[HeapNode alloc] initWithValue:10];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    XCTAssert(newRoot.Value == 4);
+    XCTAssert(newRoot.left.Value == 10);
+
+    // test tree with 2 nodes: 10, 4 - node 4 bubbles up to root.
+    root = [[HeapNode alloc] initWithValue:10];
+    node = [[HeapNode alloc] initWithValue:4];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    XCTAssert(newRoot.Value == 4);
+    XCTAssert(newRoot.left.Value == 10);
+
+    // test tree with 2 nodes: 10, 4 - node 4 bubbles up to root.
+    root = [[HeapNode alloc] initWithValue:4];
+    node = [[HeapNode alloc] initWithValue:10];
+    [root insertNodeToCompleteTree:node];
+    node = [[HeapNode alloc] initWithValue:3];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    XCTAssert(newRoot.Value == 3);
+    XCTAssert(newRoot.left.Value == 10);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 10);
+    XCTAssert(nodes[1].Value ==4);
+}
+
+    /* build a tree & insert 15
+           10
+          /  \
+        16    11
+       /
+      15   <== added, bubble up from here
+     
+     result should be:
+     
+            10
+           /  \
+         15    11
+        /
+      16
+     
+     */
+- (void) testBubbleUpWithPath_1
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+
+    root = [self buildTree_2];
+    node = [[HeapNode alloc] initWithValue:15];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 10);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 15);
+    XCTAssert(nodes[1].Value == 11);
+
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 1);
+    XCTAssert(nodes[0].Value == 16);
+    
+}
+
+/* build a tree & insert 15
+        10
+       /  \
+     16    11
+    /
+   8   <== added, bubble up from here
+ 
+ result should be:
+ 
+        8
+       / \
+     10   11
+    /
+  16
+ 
+ */
+- (void) testBubbleUpWithPath_2
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    root = [self buildTree_2];
+    node = [[HeapNode alloc] initWithValue:8];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 8);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 10);
+    XCTAssert(nodes[1].Value == 11);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 1);
+    XCTAssert(nodes[0].Value == 16);
+    
+}
+
+/* build a tree & insert 18
+          10
+         /  \
+       16    11
+      / \
+     18   18  <== added, bubble up from here
+ 
+ result should be:
+ 
+          10
+         /  \
+       16    11
+      /  \
+    22   18
+ */
+- (void) testBubbleUpWithPath_3
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    root = [self buildTree_2];
+    node = [[HeapNode alloc] initWithValue:22];
+    [root insertNodeToCompleteTree:node];
+    node = [[HeapNode alloc] initWithValue:18];
+    [root insertNodeToCompleteTree:node];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 10);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 11);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 18);
+}
+
+/* build a tree & insert 12
+             10
+            /   \
+          16     11
+         /  \
+        22   12         <== added, bubble up from here
+ 
+ result should be:
+ 
+            10
+           /  \
+         12    11
+        /  \
+      22    16
+ */
+- (void) testBubbleUpWithPath_4
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    // build the tree
+    root = [self buildTree_2];
+    root = [[HeapNode alloc] initWithValue:10];
+    [self insertValue:16 intoTree:root];
+    [self insertValue:11 intoTree:root];
+    [self insertValue:22 intoTree:root];
+
+    // add 12 and bubble it up.
+    node = [self insertValue:12 intoTree:root];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 10);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 12);
+    XCTAssert(nodes[1].Value == 11);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 16);
+}
+
+/* build a tree & insert 8
+                10
+               /   \
+             16     11
+            /  \
+          22    8         <== added, bubble up from here
+ 
+ result should be:
+ 
+                 8
+                / \
+               /   \
+              10   11
+             /  \
+           22    16
+ */
+- (void) testBubbleUpWithPath_5
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    // build the tree
+    root = [self buildTree_2];
+    root = [[HeapNode alloc] initWithValue:10];
+    [self insertValue:16 intoTree:root];
+    [self insertValue:11 intoTree:root];
+    [self insertValue:22 intoTree:root];
+    
+    // add 12 and bubble it up.
+    node = [self insertValue:8 intoTree:root];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 8);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 10);
+    XCTAssert(nodes[1].Value == 11);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 16);
+}
+
+/* build a tree & insert 12
+                   10
+                  / \
+                 /   \
+                /     \
+              16       15
+             /  \     /  \
+           22    18  20   12   <== added, bubble up from here
+ 
+ result:
+                    10
+                   /  \
+                  /    \
+                 /      \
+               16       12
+              /  \     /  \
+            22    18  20   15   <== added, bubble up from here
+*/
+
+- (void) testBubbleUpWithPath_6
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    // build the tree
+    root = [self buildTree_2];
+    root = [[HeapNode alloc] initWithValue:10];
+    [self insertValue:16 intoTree:root];
+    [self insertValue:15 intoTree:root];
+    [self insertValue:22 intoTree:root];
+    [self insertValue:18 intoTree:root];
+    [self insertValue:20 intoTree:root];
+    
+    // add 20 and bubble it up.
+    node = [self insertValue:12 intoTree:root];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 10);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 12);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 4);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 18);
+    XCTAssert(nodes[2].Value == 20);
+    XCTAssert(nodes[3].Value == 15);
+}
+
+/* build a tree & insert 8
+               10
+               / \
+              /   \
+             /     \
+           16       15
+          /  \     /  \
+        22    18  20   8   <== added, bubble up from here
+ 
+ result:
+                8
+               / \
+              /   \
+             /     \
+            /       \
+          16        10
+         /  \      /  \
+       22    18  20   15   <== added, bubble up from here
+ */
+
+- (void) testBubbleUpWithPath_7
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    HeapNode* node;
+    NSMutableArray<HeapNode*> *nodes;
+    NSMutableArray<HeapNode*> *path;
+    
+    // build the tree
+    root = [self buildTree_2];
+    root = [[HeapNode alloc] initWithValue:10];
+    [self insertValue:16 intoTree:root];
+    [self insertValue:15 intoTree:root];
+    [self insertValue:22 intoTree:root];
+    [self insertValue:18 intoTree:root];
+    [self insertValue:20 intoTree:root];
+    
+    // add 8 and bubble it up.
+    node = [self insertValue:8 intoTree:root];
+    path = [root createPathToNode:node];
+    newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    //check root
+    XCTAssert( newRoot.Value == 8);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 10);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 4);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 18);
+    XCTAssert(nodes[2].Value == 20);
+    XCTAssert(nodes[3].Value == 15);
 }
 
 
@@ -333,6 +738,12 @@
 }
 
 #pragma mark- Build Tree Methods
+/*
+ NOTE: Build tree methods build a tree from scratch manually.
+       It does not use any heap node methods so it can be used
+       to independently test the various functions.
+*/
+
 /* build a tree:
         10
        /  \
@@ -413,4 +824,12 @@
     return root;
 }
 
+/*helper method to insert a value into the tree with root
+ */
+-(HeapNode*)insertValue:(int)value intoTree:(HeapNode*)root
+{
+    HeapNode* node = [[HeapNode alloc] initWithValue:value];
+    [root insertNodeToCompleteTree:node];
+    return node;
+}
 @end
