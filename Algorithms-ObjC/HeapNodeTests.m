@@ -46,8 +46,8 @@
     
 }
 
-#pragma mark- GetTreeDepth Unit Tests
-- (void)testGetTreeDepth_0 {
+#pragma mark- GetTreeHeight Unit Tests
+- (void)testGetTreeHeight_0 {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     
@@ -55,23 +55,23 @@
     int depth;
     
     root = [self buildTree_0];
-    depth = [root getTreeDepth];
+    depth = [root getTreeHeight];
     XCTAssert(depth == 0);
     
     root = [self buildTree_1];
-    depth = [root getTreeDepth];
+    depth = [root getTreeHeight];
     XCTAssert(depth == 1);
 
     root = [self buildTree_2];
-    depth = [root getTreeDepth];
+    depth = [root getTreeHeight];
     XCTAssert(depth == 1);
 
     root = [self buildTree_3];
-    depth = [root getTreeDepth];
+    depth = [root getTreeHeight];
     XCTAssert(depth == 3);
 }
 
-- (void)testGetNodesAtDepth_0
+- (void)testGetNodesAtHeight_0
 {
     HeapNode *root = [self buildTree_0];
     NSMutableArray<HeapNode*> *nodes;
@@ -728,6 +728,386 @@
     XCTAssert(nodes[3].Value == 15);
 }
 
+#pragma mark- Test Insert Value
+
+/* build a tree & insert 15
+                 10
+                /  \
+              16    11
+ 
+ result should be:
+ 
+                 10
+                /  \
+              15    11
+              /
+            16
+ 
+ */
+- (void) testInserValue_1
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    NSMutableArray<HeapNode*> *nodes;
+    
+    root = [self buildTree_2];
+    newRoot = [root insertValue:15];
+
+    //check root
+    XCTAssert( newRoot.Value == 10);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 15);
+    XCTAssert(nodes[1].Value == 11);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 1);
+    XCTAssert(nodes[0].Value == 16);
+    
+}
+
+/* build a tree & insert 8
+                10
+                / \
+               /   \
+              /     \
+            16       15
+           /  \     /
+         22    18  20
+ 
+ result:
+                8
+               / \
+              /   \
+             /     \
+            /       \
+          16        10
+         /  \      /  \
+       22    18  20   15
+ */
+
+- (void) testInsertValue_7
+{
+    HeapNode* newRoot;
+    HeapNode *root;
+    NSMutableArray<HeapNode*> *nodes;
+    
+    // build the tree
+    root = [self buildTree_2];
+    root = [[HeapNode alloc] initWithValue:10];
+    [self insertValue:16 intoTree:root];
+    [self insertValue:15 intoTree:root];
+    [self insertValue:22 intoTree:root];
+    [self insertValue:18 intoTree:root];
+    [self insertValue:20 intoTree:root];
+    
+    // add 8 and bubble it up.
+    newRoot = [root insertValue:8];
+    
+    //check root
+    XCTAssert( newRoot.Value == 8);
+    
+    // check next level.
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 10);
+    
+    nodes= [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 4);
+    XCTAssert(nodes[0].Value == 22);
+    XCTAssert(nodes[1].Value == 18);
+    XCTAssert(nodes[2].Value == 20);
+    XCTAssert(nodes[3].Value == 15);
+}
+
+#pragma mark- Test Get Last Node in complete tree.
+- (void)testGetLastNode
+{
+    HeapNode* root;
+    HeapNode* node;
+    
+    root = [self buildTree_0];
+    node = [root getLastNode];
+    XCTAssert(node != nil);
+    XCTAssert(node.Value == 10);
+    
+    root = [self buildTree_1];
+    node = [root getLastNode];
+    XCTAssert(node != nil);
+    XCTAssert(node.Value == 16);
+    
+    root = [self buildTree_2];
+    node = [root getLastNode];
+    XCTAssert(node != nil);
+    XCTAssert(node.Value == 11);
+    
+    root = [self buildTree_3];
+    node = [root getLastNode];
+    XCTAssert(node != nil);
+    XCTAssert(node.Value == 52);
+
+}
+
+#pragma mark- Test Extract Min
+
+- (void)testExtract_1
+{
+    HeapNode* min;
+    HeapNode* newRoot;
+    
+    min = [self buildTree_0];
+    newRoot = [min extract];
+    XCTAssert(min.Value == 10);
+    XCTAssert(newRoot == nil);
+
+    min = [self buildTree_1];
+    newRoot = [min extract];
+    XCTAssert(min.Value == 10);
+    XCTAssert(newRoot != nil);
+    XCTAssert(newRoot.Value == 16);
+    XCTAssert(newRoot.left == nil);
+    XCTAssert(newRoot.right == nil);
+    
+    min = [self buildTree_2];
+    newRoot = [min extract];
+    XCTAssert(min.Value == 10);
+    XCTAssert(newRoot != nil);
+    XCTAssert(newRoot.Value == 11);
+    XCTAssert(newRoot.left != nil);
+    XCTAssert(newRoot.left.Value == 16);
+    XCTAssert(newRoot.right == nil);
+}
+
+/* extract from a bigger tree (see buildTree_3)
+   Then continue extracting until no more items are 
+    left (i.e. root == nil)
+ */
+
+- (void)testExtract_2
+{
+    HeapNode* min;
+    HeapNode* newRoot;
+    
+    min = [self buildTree_3];
+    newRoot = [min extract];
+    
+    /* result should be
+                11
+               /  \
+              /    \
+             /      \
+           16        30
+          /  \      /  \
+        18  100   40   52
+        /
+      26
+     
+     */
+    XCTAssert(min.Value == 10);
+    XCTAssert(newRoot != nil);
+    XCTAssert(newRoot.Value == 11);
+    
+    NSArray<HeapNode*> *nodes = [newRoot getNodesAtDepth:1];
+    
+    XCTAssert(nodes[0].Value == 16);
+    XCTAssert(nodes[1].Value == 30);
+
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes[0].Value == 18);
+    XCTAssert(nodes[1].Value == 100);
+    XCTAssert(nodes[2].Value == 40);
+    XCTAssert(nodes[3].Value == 52);
+
+    nodes = [newRoot getNodesAtDepth:3];
+    XCTAssert(nodes[0].Value == 26);
+    
+    
+    // Extract next Min
+    newRoot = [newRoot extract];
+    /* result should be
+                16
+               /  \
+              /    \
+             /      \
+            18        30
+           /  \      /  \
+          26 100    40   52
+     */
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 18);
+    XCTAssert(nodes[1].Value == 30);
+
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 4);
+    XCTAssert(nodes[0].Value == 26);
+    XCTAssert(nodes[1].Value == 100);
+    XCTAssert(nodes[2].Value == 40);
+    XCTAssert(nodes[3].Value == 52);
+    
+    nodes = [newRoot getNodesAtDepth:3];
+    XCTAssert(nodes.count == 0);
+
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+            18
+           /  \
+          /    \
+         /      \
+       26        30
+      /  \      /
+     52 100    40
+     
+     */
+    
+    XCTAssert(min.Value == 16);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 26);
+    XCTAssert(nodes[1].Value == 30);
+    
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 3);
+    XCTAssert(nodes[0].Value == 52);
+    XCTAssert(nodes[1].Value == 100);
+    XCTAssert(nodes[2].Value == 40);
+    
+    nodes = [newRoot getNodesAtDepth:3];
+    XCTAssert(nodes.count == 0);
+
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+            26
+           /  \
+          /    \
+         /      \
+        40      30
+       /  \
+      52  100
+     
+     */
+    
+    XCTAssert(min.Value == 18);
+    XCTAssert(newRoot.Value == 26);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 40);
+    XCTAssert(nodes[1].Value == 30);
+    
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 52);
+    XCTAssert(nodes[1].Value == 100);
+    
+    nodes = [newRoot getNodesAtDepth:3];
+    XCTAssert(nodes.count == 0);
+    
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+            30
+           /  \
+          /    \
+         /      \
+        40      100
+       /
+     52
+     
+     */
+    
+    XCTAssert(min.Value == 26);
+    XCTAssert(newRoot.Value == 30);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 40);
+    XCTAssert(nodes[1].Value == 100);
+    
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 1);
+    XCTAssert(nodes[0].Value == 52);
+    
+    nodes = [newRoot getNodesAtDepth:3];
+    XCTAssert(nodes.count == 0);
+
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+            40
+           /  \
+          52  100
+     
+     */
+    
+    XCTAssert(min.Value == 30);
+    XCTAssert(newRoot.Value == 40);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 2);
+    XCTAssert(nodes[0].Value == 52);
+    XCTAssert(nodes[1].Value == 100);
+    
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 0);
+    
+    
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+        52
+       /
+     100
+     
+     */
+    
+    XCTAssert(min.Value == 40);
+    XCTAssert(newRoot.Value == 52);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 1);
+    XCTAssert(nodes[0].Value == 100);
+    
+    nodes = [newRoot getNodesAtDepth:2];
+    XCTAssert(nodes.count == 0);
+
+    
+    // Extract next Min
+    min = newRoot;
+    newRoot = [newRoot extract];
+    /* result should be
+        100
+        / \
+       -   -
+     
+     */
+    
+    XCTAssert(min.Value == 52);
+    XCTAssert(newRoot.Value == 100);
+    
+    nodes = [newRoot getNodesAtDepth:1];
+    XCTAssert(nodes.count == 0);
+    
+    // Extract last value.
+
+    min = newRoot;
+    newRoot = [newRoot extract];
+    XCTAssert(min.Value == 100);
+    XCTAssert(newRoot == nil);
+
+}
 
 #pragma mark- Performance Unit Tests
 - (void)testPerformanceExample {

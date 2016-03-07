@@ -33,7 +33,7 @@
 /*
  Depth of a complete binary tree is always the left-most leaf node from the current node.
  */
--(int) getTreeDepth
+-(int) getTreeHeight
 {
     int depth = 0;
     HeapNode* node = self;
@@ -73,13 +73,13 @@
 }
 
 /*
- Computes next parent node from the self as root.
+ returns next parent node from the self as root.
  */
 -(HeapNode*)getNextParentHeapNode
 {
     HeapNode* nextParent;
     
-    int depth = [self getTreeDepth];
+    int depth = [self getTreeHeight];
     NSMutableArray<HeapNode*> *nodes;
     
     nodes = [self getNodesAtDepth:depth];
@@ -192,12 +192,137 @@
 
 /*
  inserts a node into tree then bubbles the up the mininum value.
+ assume self as root
 */
+-(HeapNode*)insertValue:(int)value
+{
+    HeapNode* node = [[HeapNode alloc] initWithValue:value];
+    [self insertNodeToCompleteTree:node];
 
+    NSMutableArray<HeapNode*> *path;
+    path = [self createPathToNode:node];
+    HeapNode* newRoot = [HeapNode bubbleUpWithPath:path];
+    
+    return newRoot;
+}
 
 /*
- recursive function to find a node.
+    getLastNode - returns the last node in the binary heap (i.e. complete binary tree).
+*/
+
+- (HeapNode*) getLastNode
+{
+    int depth = [self getTreeHeight];
+    NSMutableArray<HeapNode*> *nodes;
+    
+    nodes = [self getNodesAtDepth:depth];
+    
+    return [nodes lastObject];
+}
+
+/*
+ extract the min value (i.e. root)
+ side effects: root.left and root.right are set to nil (i.e no longer refer to the nodes in the tree).
+ returns the new root.
+ returns nil if no node left in the tree.
  */
+
+-(HeapNode*)extract
+{
+    HeapNode* newRoot = [[HeapNode alloc] initWithValue:self.Value];
+    newRoot.left = self.left;
+    newRoot.right = self.right;
+    self.left = nil;
+    self.right = nil;
+    
+    // replace the current root with the last node on the tree.
+    HeapNode* node = [newRoot getLastNode];
+    NSArray<HeapNode*> *path = [newRoot createPathToNode:node];
+    HeapNode* parent = path.count>1 ? [path objectAtIndex:1] : nil;
+
+    newRoot.Value = node.Value;
+    
+    // remove the last node from the tree.
+    if (parent == nil)
+        return nil;  // no more nodes. empty binary tree.
+    if (parent && parent.right != nil)
+    {
+        parent.right = nil;
+    }
+    else
+    {
+        parent.left = nil;
+    }
+    
+    // starting at the our new Root, push the node value down the tree.
+    HeapNode* currNode = newRoot;
+    while (currNode !=nil)
+    {
+        if (currNode.left && currNode.right)
+        {
+            if (currNode.left.Value < currNode.right.Value)
+            {// work with the left side
+                if (currNode.left.Value < currNode.Value)
+                {// swap with the LEFT side
+                    int tmp = currNode.Value;
+                    currNode.Value = currNode.left.Value;
+                    currNode.left.Value = tmp;
+                    currNode = currNode.left;
+                }
+                else
+                    currNode = nil;
+            }
+            else
+            { // swap with the RIGHT side
+                if (currNode.right.Value < currNode.Value)
+                {
+                    int tmp = currNode.Value;
+                    currNode.Value = currNode.right.Value;
+                    currNode.right.Value = tmp;
+                    currNode = currNode.right;
+                }
+                else
+                    currNode = nil;
+            }
+        }
+        else if (currNode.left != nil)
+        {// left side.
+            if (currNode.left.Value < currNode.Value)
+            {// swap with the LEFT side
+                int tmp = currNode.Value;
+                currNode.Value = currNode.left.Value;
+                currNode.left.Value = tmp;
+                currNode = currNode.left;
+            }
+            else
+                currNode = nil;
+        }
+        else if (currNode.right != nil)
+        {
+            if (currNode.right.Value < currNode.Value)
+            {
+                int tmp = currNode.Value;
+                currNode.Value = currNode.right.Value;
+                currNode.right.Value = tmp;
+                currNode = currNode.right;
+            }
+            else
+                currNode = nil;
+        }
+        else
+        {
+            currNode = nil;
+        }
+    }
+
+    // return the minimum node.
+    return newRoot;
+}
+
+/*
+ recursive function to find a path to a node.
+ */
+
 -(BOOL)findPath:(NSMutableArray<HeapNode*>*)path forTarget: (HeapNode*)target
 {
     BOOL found = NO;
@@ -232,7 +357,7 @@
 
 /*
  createPathToNode
- returns a the nodes that lead from the current node (i.e. root) to the desired node.
+ returns a the nodes that lead from the desired node to the root.
  returns nil if no path is found. 
  Although it is intended to be used with the root node, it will work for any node in a tree.
  

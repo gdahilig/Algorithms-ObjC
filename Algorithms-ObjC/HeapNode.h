@@ -16,11 +16,14 @@
 
 -(id) initWithValue:(int)val;
 -(id) initWithValue:(int) val andData:(id)data;
--(int) getTreeDepth;
+-(int) getTreeHeight;
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
 -(HeapNode*)getNextParentHeapNode;
 -(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode;
 -(HeapNode*)insertNodeToCompleteTree:(HeapNode*)nodeNew;
 
 +(HeapNode*)bubbleUpWithPath:(NSMutableArray<HeapNode*>*)path;
+- (HeapNode*) getLastNode;
+-(HeapNode*)insertValue:(int)value;
+-(HeapNode*)extract;
 @end
