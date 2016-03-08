@@ -260,6 +260,12 @@
 
     
 }
+
+-(void) testCreatePathToNode
+{
+    
+}
+
 #pragma mark- Insert Node Unit Tests
 /*
     starting with a tree that has only a single node with the value of 10.
@@ -783,6 +789,30 @@
     
 }
 
+/* Build Tree
+ 
+ 
+ */
+
+-(void)testInsertValue_2
+{
+    HeapNode* root = [[HeapNode alloc] initWithValue:976];
+    root = [root insertValue:5086];
+    root = [root insertValue:7763];
+    root = [root insertValue:188];
+    root = [root insertValue:947];
+    root = [root insertValue:1431];
+    root = [root insertValue:1517];
+    root = [root insertValue:911];
+    
+    [root printTree];
+    
+    root = [root insertValue:188];
+    [root printTree];
+    
+    
+}
+
 /* build a tree & insert 8
                 10
                 / \
@@ -1144,45 +1174,55 @@
     
 }
 
+
 -(void)testRandomeNumberHeap_2
 {
     HeapNode* root;
-    int numItems = 20;
-    // load the values into an array
-    NSMutableArray *values = [self loadFile:@"TestsData_10000_random" withExt:@"txt" Size:numItems];
-    // build tree using the array.
-    root = [self buildTreeWithArray:values];
-    // sort the tree so that we can use as expected values.
-    NSArray<NSNumber*> *sortedValues  = [values sortedArrayUsingComparator:^(NSNumber* obj1, NSNumber* obj2) {
-        if ([obj1 integerValue] > [obj2 integerValue]) {
-            return (NSComparisonResult)NSOrderedDescending;
-        }
-        
-        if ([obj1 integerValue] < [obj2 integerValue]) {
-            return (NSComparisonResult)NSOrderedAscending;
-        }
-        return (NSComparisonResult)NSOrderedSame;
-    }];
+    int numItems = 10000;
     
-    int height = [root getTreeHeight];
-    int count = [root getNumberOfItems];
-    NSLog(@"Tree height: %d",height);
-    NSLog(@"Number of Items: %d", count);
-    
-    count = 0;
-    while (root != nil)
+//    for (int numItems = 1; numItems<10000; numItems++)
     {
+        // load the values into an array
+        NSMutableArray *values = [self loadFile:@"TestsData_10000_random" withExt:@"txt" Size:numItems];
+        // build tree using the array.
+        root = [self buildTreeWithArray:values];
+        [root printTree];
+        // sort the tree so that we can use as expected values.
+        NSArray<NSNumber*> *sortedValues  = [values sortedArrayUsingComparator:^(NSNumber* obj1, NSNumber* obj2) {
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
         
-        NSLog(@"Min value: %d",root.Value);
-        NSNumber *value = sortedValues[count];
-        int expectedValue = value.intValue;
-        XCTAssert(root.Value == expectedValue);
-        root = [root extract];
+        int height = [root getTreeHeight];
+        int count = [root getNumberOfItems];
+        NSLog(@"Tree height: %d",height);
+        NSLog(@"Number of Items: %d", count);
+        
+        count = 0;
+        while (root != nil)
+        {
+            NSNumber *value = sortedValues[count];
+            int expectedValue = value.intValue;
+            
+            NSLog(@"%5d) Min: %5d  Expected: %5d ",count,root.Value, expectedValue);
 
-        count++;
+            XCTAssert(root.Value == expectedValue);
+            if (root.Value != expectedValue)
+                return;
+            root = [root extract];
+
+            count++;
+        }
+        XCTAssert(count == numItems);
+        
+        
     }
-    XCTAssert(count == numItems);
-    
 }
 -(void)testRandomNumberHeapPerformance_1
 {
@@ -1194,6 +1234,53 @@
     }];
 }
 
+
+-(void)testRandomNumberHeapPerformance_2
+{
+    __block HeapNode* root;
+    int numItems = 10000;
+    
+    //    for (int numItems = 1; numItems<10000; numItems++)
+    [self measureBlock:^{
+        // load the values into an array
+        NSMutableArray *values = [self loadFile:@"TestsData_10000_random" withExt:@"txt" Size:numItems];
+        // build tree using the array.
+        root = [self buildTreeWithArray:values];
+        // sort the tree so that we can use as expected values.
+        NSArray<NSNumber*> *sortedValues  = [values sortedArrayUsingComparator:^(NSNumber* obj1, NSNumber* obj2) {
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+        
+        int height = [root getTreeHeight];
+        int count = [root getNumberOfItems];
+        NSLog(@"Tree height: %d",height);
+        NSLog(@"Number of Items: %d", count);
+        
+        count = 0;
+        while (root != nil)
+        {
+            NSNumber *value = sortedValues[count];
+            int expectedValue = value.intValue;
+            
+//            NSLog(@"%5d) Min: %5d  Expected: %5d ",count,root.Value, expectedValue);
+            
+            XCTAssert(root.Value == expectedValue);
+            if (root.Value != expectedValue)
+                return;
+            root = [root extract];
+            
+            count++;
+        }
+        XCTAssert(count == numItems);
+    }];
+}
 
 
 #pragma mark- Performance Unit Tests
@@ -1351,7 +1438,7 @@
     {
         NSInteger randomNum = [number integerValue];
         
-        NSLog(@"%d: %d",idx, (int)randomNum);
+//        NSLog(@"%d: %d",idx, (int)randomNum);
         if (root != nil)
         {
             root = [root insertValue:(int)randomNum];
@@ -1362,7 +1449,7 @@
         }
         idx++;
         
-        [root printTree];
+//        [root printTree];
     }
     return root;
 }

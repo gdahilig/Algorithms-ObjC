@@ -337,7 +337,7 @@
 -(BOOL)findPath:(NSMutableArray<HeapNode*>*)path forTarget: (HeapNode*)target
 {
     BOOL found = NO;
-    if (target.Value == self.Value)
+if (target == self)
     {
         [path addObject:self];
         return YES;
