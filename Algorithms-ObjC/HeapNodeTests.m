@@ -10,7 +10,8 @@
 #import "HeapNode.h"
 
 @interface HeapNodeTests : XCTestCase
-
+@property NSArray<NSNumber*> *arrayNumbers;
+@property NSArray<NSNumber*> *arraySorted;
 @end
 
 @implementation HeapNodeTests
@@ -48,9 +49,6 @@
 
 #pragma mark- GetTreeHeight Unit Tests
 - (void)testGetTreeHeight_0 {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    
     HeapNode *root;
     int depth;
     
@@ -70,6 +68,23 @@
     depth = [root getTreeHeight];
     XCTAssert(depth == 3);
 }
+#pragma mark- Get Number of Items
+-(void)testGetNumberOfItems_0
+{
+    HeapNode *root;
+    int total;
+    const int maxItems = 100;
+    
+    for (int numItems = 1; numItems < maxItems; numItems++)
+    {
+        root = [self buildTreeWithFile:@"TestsData_10000_random" Ext:@"txt" Size:numItems];
+        total = [root getNumberOfItems];
+        XCTAssert(numItems == total);
+    }
+
+}
+
+#pragma mark- GetNodes at Height
 
 - (void)testGetNodesAtHeight_0
 {
@@ -1109,6 +1124,78 @@
 
 }
 
+#pragma mark- Build large min heam of random numbers
+
+-(void)testRandomeNumberHeap_1
+{
+    HeapNode* root;
+    
+    root = [self buildTree_Random_1];
+    int height = [root getTreeHeight];
+    NSLog(@"Tree height: %d",height);
+    int cnt = 0;
+    while (root != nil)
+    {
+        root = [root extract];
+        NSLog(@"Min value: %d",root.Value);
+        cnt++;
+    }
+    XCTAssert(cnt == 10000);
+    
+}
+
+-(void)testRandomeNumberHeap_2
+{
+    HeapNode* root;
+    int numItems = 20;
+    // load the values into an array
+    NSMutableArray *values = [self loadFile:@"TestsData_10000_random" withExt:@"txt" Size:numItems];
+    // build tree using the array.
+    root = [self buildTreeWithArray:values];
+    // sort the tree so that we can use as expected values.
+    NSArray<NSNumber*> *sortedValues  = [values sortedArrayUsingComparator:^(NSNumber* obj1, NSNumber* obj2) {
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    int height = [root getTreeHeight];
+    int count = [root getNumberOfItems];
+    NSLog(@"Tree height: %d",height);
+    NSLog(@"Number of Items: %d", count);
+    
+    count = 0;
+    while (root != nil)
+    {
+        
+        NSLog(@"Min value: %d",root.Value);
+        NSNumber *value = sortedValues[count];
+        int expectedValue = value.intValue;
+        XCTAssert(root.Value == expectedValue);
+        root = [root extract];
+
+        count++;
+    }
+    XCTAssert(count == numItems);
+    
+}
+-(void)testRandomNumberHeapPerformance_1
+{
+    __block HeapNode* root;
+    
+    [self measureBlock:^{
+        root = [self buildTree_Random_1];
+        XCTAssert(root != nil);
+    }];
+}
+
+
+
 #pragma mark- Performance Unit Tests
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
@@ -1201,6 +1288,112 @@
     node18.right    = node52;
     node11.left     = node40;
     node11.right    = node30;
+    return root;
+}
+
+-(HeapNode*)buildTree_Random_1
+{
+    HeapNode* root = nil;
+    NSBundle * bundle = [NSBundle bundleForClass:[self class]];
+    NSString * file = [bundle pathForResource:@"TestsData_10000_random" ofType:@"txt"];;
+//    NSData * dataRandomNumbers = [NSData dataWithContentsOfFile:[file stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *contents = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:NULL];
+    
+    NSArray *lines = [contents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    int idx = 0;
+    for (NSString *line in lines) {
+        NSInteger randomNum = [line integerValue];
+
+        NSLog(@"%d: %d",idx, (int)randomNum);
+        if (root != nil)
+        {
+            [root insertValue:(int)randomNum];
+        }
+        else
+        {
+            root = [[HeapNode alloc] initWithValue:(int)randomNum];
+        }
+        idx++;
+        if (idx > 9995)
+            NSLog(@"Break");
+
+    }
+    return root;
+}
+
+-(NSMutableArray*)loadFile:(NSString*)name withExt:(NSString*)ext Size:(int)size
+{
+    NSBundle * bundle = [NSBundle bundleForClass:[self class]];
+    NSString * file = [bundle pathForResource:name ofType:@"txt"];;
+    //    NSData * dataRandomNumbers = [NSData dataWithContentsOfFile:[file stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *contents = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:NULL];
+    
+    NSArray *lines = [contents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    
+    NSMutableArray *intArray = [[NSMutableArray alloc] initWithCapacity:lines.count];
+
+    int idx = 0;
+    for (NSString* line in lines)
+    {
+        if (idx >= size)
+            break;
+        intArray[idx] =  [NSNumber numberWithInteger:[line integerValue]];
+        idx++;
+    }
+    return intArray;
+}
+
+-(HeapNode*)buildTreeWithArray:(NSArray*)arryNumbers
+{
+    HeapNode* root = nil;
+    int idx = 0;
+    for (NSNumber *number in arryNumbers)
+    {
+        NSInteger randomNum = [number integerValue];
+        
+        NSLog(@"%d: %d",idx, (int)randomNum);
+        if (root != nil)
+        {
+            root = [root insertValue:(int)randomNum];
+        }
+        else
+        {
+            root = [[HeapNode alloc] initWithValue:(int)randomNum];
+        }
+        idx++;
+        
+        [root printTree];
+    }
+    return root;
+}
+
+-(HeapNode*)buildTreeWithFile:(NSString*)filename Ext:ext Size:(int)numItems
+{
+    HeapNode* root = nil;
+    
+    NSArray *arryNumbers = [self loadFile:filename withExt:ext Size:numItems];
+    
+    int idx = 0;
+    for (NSNumber *number in arryNumbers) {
+        
+        if (idx>=numItems)
+            break;
+        
+        NSInteger randomNum = [number integerValue];
+        
+        NSLog(@"%d: %d",idx, (int)randomNum);
+        if (root != nil)
+        {
+            root = [root insertValue:(int)randomNum];
+        }
+        else
+        {
+            root = [[HeapNode alloc] initWithValue:(int)randomNum];
+        }
+        idx++;
+        
+        [root printTree];
+    }
     return root;
 }
 

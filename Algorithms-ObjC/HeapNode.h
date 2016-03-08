@@ -17,6 +17,7 @@
 -(id) initWithValue:(int)val;
 -(id) initWithValue:(int) val andData:(id)data;
 -(int) getTreeHeight;
+-(int) getNumberOfItems;
 -(NSMutableArray<HeapNode*>*)getNodesAtDepth:(int)depth;
 -(HeapNode*)getNextParentHeapNode;
 -(NSMutableArray<HeapNode*>*)createPathToNode:(HeapNode*)targetNode;
@@ -26,4 +27,5 @@
 - (HeapNode*) getLastNode;
 -(HeapNode*)insertValue:(int)value;
 -(HeapNode*)extract;
+-(void) printTree;
 @end

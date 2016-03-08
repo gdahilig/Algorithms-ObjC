@@ -30,6 +30,17 @@
       return self;
   }
 
+-(int) getNumberOfItems
+{
+    int num = 0;
+    
+    int numLeft = (self.left != nil)? [self.left getNumberOfItems] : 0;
+    int numRight= (self.right!= nil)? [self.right getNumberOfItems]: 0;
+    
+    return numLeft + numRight + 1;
+    
+}
+
 /*
  Depth of a complete binary tree is always the left-most leaf node from the current node.
  */
@@ -377,4 +388,30 @@
     
     return path;
 }
+
+-(void) print
+{
+    int lVal = (self.left !=nil) ? self.left.Value : -1;
+    int rVal = (self.right !=nil) ? self.right.Value : -1;
+    NSLog(@"node: %5d  (%5d,%5d)", self.Value, lVal,rVal);
+}
+
+-(void) printTree
+{
+    NSMutableArray<HeapNode*> *queue = [[NSMutableArray alloc] initWithCapacity:100];
+
+    [queue addObject:self];
+    while (queue.count > 0)
+    {
+        HeapNode* curr = queue[0];
+        
+        [curr print];
+        if (curr.left != nil)
+            [queue addObject:curr.left];
+        if (curr.right != nil)
+            [queue addObject:curr.right];
+        [queue removeObjectAtIndex:0];
+    }
+}
+
 @end
