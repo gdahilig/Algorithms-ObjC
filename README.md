@@ -14,3 +14,6 @@ Per my usual development flow, these algorithms are written in TDD fashion where
 1. Fibonacci Sequence.
 
 Currently, performance is not measured, but hopefully will be added in the future.
+
+2. Mininum Heap
+Minimum heap.  Test cases include a heap with 10,000 psuedo-random numbers.
