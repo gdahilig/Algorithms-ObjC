@@ -11,11 +11,11 @@ Per my usual development flow, these algorithms are written in TDD fashion where
 
 ## Algorithms
 
-1. Fibonacci Sequence.
+### Fibonacci Sequence.
 
 Currently, performance is not measured, but hopefully will be added in the future.
 
-2. Mininum Heap
+### Mininum Heap
 
 Minimum heap unit test cases.  
 
