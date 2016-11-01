@@ -7,7 +7,7 @@ Then source code organization is:
 1.   A Class that performs the algorithm.
 2.   A Test case verify the algorithm.
 
-Per my usual development flow, these algorithms are written in TDD fashion where I create the basic algorithm class with at least one method that implements the algorithm, then follow it with a test method.  I'm testing all along the way.  While it does create overhead in implementation, the results what I hope is highly testable code.  
+Per my usual development flow, these algorithms are written in TDD fashion where I'm testing all along the way.  While it does create overhead in implementation, the results what I hope is highly testable code.  
 
 ## Algorithms
 
